@@ -51,7 +51,6 @@ main = hakyll $ do
         route $ setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
-            >>= relativizeUrls
 
     match ("loever/*" .||. "rekvisitter/*" .||. "entreprenoerer/*") $ do
         route $ cleanRoute `composeRoutes` setExtension "html"

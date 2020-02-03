@@ -1,1 +1,2 @@
 User-agent: *
+Sitemap: https://isbryder.github.io/sitemap.xml

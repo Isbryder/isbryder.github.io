@@ -48,6 +48,12 @@ main = hakyll $ do
             >>= relativizeUrls
             >>= cleanIndexHtmls
 
+    match "404.markdown" $ do
+        route $ setExtension "html"
+        compile $ pandocCompiler
+            >>= loadAndApplyTemplate "templates/default.html" defaultContext
+            >>= relativizeUrls
+
     match ("loever/*" .||. "rekvisitter/*" .||. "entreprenoerer/*") $ do
         route $ cleanRoute `composeRoutes` setExtension "html"
         compile $ pandocCompiler

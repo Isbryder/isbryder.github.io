@@ -1,4 +1,3 @@
---------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
 import Data.Monoid (mappend)
 import Hakyll
@@ -40,7 +39,9 @@ main = hakyll $ do
         compile (getResourceString >>= withItemBody (unixFilter "runghc" []))
 
     match "pages/*" $ do
-        route $ gsubRoute "pages/" (const "") `composeRoutes` cleanRoute `composeRoutes` setExtension "html"
+        route $ gsubRoute "pages/" (const "")
+                    `composeRoutes` cleanRoute
+                    `composeRoutes` setExtension "html"
         compile $ getResourceBody
             >>= applyAsTemplate defaultContext
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
@@ -91,6 +92,21 @@ main = hakyll $ do
                 >>= loadAndApplyTemplate "templates/default.html" ctx
                 >>= relativizeUrls
                 >>= cleanIndexHtmls
+
+    create ["sitemap.xml"] $ do
+        route idRoute
+        compile $ do
+            loever <- loadAll "loever/*"
+            entreprenoerer <- loadAll "entreprenoerer/*"
+            rekvisitter <- loadAll "rekvisitter/*"
+            pages <- loadAll "pages/*"
+            let content = loever ++ entreprenoerer ++ rekvisitter ++ pages
+            let hostCtx = constField "host" "isbryder.github.io" `mappend` defaultContext
+            let sitemapCtx = listField "entries" hostCtx (return content)
+
+            makeItem []
+                >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
+                >>= relativizeUrls
 
 
     match "templates/*" $ compile templateBodyCompiler

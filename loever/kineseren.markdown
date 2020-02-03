@@ -1,5 +1,6 @@
 ---
 title: Kineseren
+description: Perfekt til en lille sur fyr
 ---
 
 ## Introduktion

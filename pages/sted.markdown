@@ -1,5 +1,6 @@
 ---
 title: Sted
+description: Inde eller ude i godt vejr. Eller hvor man nu har lyst.
 ---
 
 Inde eller ude. Entreprenører skal have plads til forberedelse af sin præsentation uden

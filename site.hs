@@ -66,6 +66,7 @@ main = hakyll $ do
 
             let ctx = listField "rekvisitter" defaultContext (return rekvisitter) `mappend`
                     constField "title" "Rekvisitter" `mappend`
+                    constField "description" "Rekvisitter og idéer." `mappend`
                     defaultContext
 
             makeItem ""
@@ -81,6 +82,7 @@ main = hakyll $ do
 
             let ctx = listField "loever" defaultContext (return loever) `mappend`
                     listField "entreprenoerer" defaultContext (return entreprenoerer) `mappend`
+                    constField "description" "Lad dig inspirere. Ikke politisk korrekt." `mappend`
                     constField "title" "Roller" `mappend`
                     defaultContext
 

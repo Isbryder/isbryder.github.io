@@ -52,7 +52,7 @@ site = html <> body ? do
         border solid (px 2) darkPrimary
         maxWidth (pct 100)
     main_ ? do
-        width (px 720)
+        maxWidth (px 720)
         border solid (px 2) darkPrimary
         backgroundColor iconText
         padding (px 40) (px 40)  (px 40) (px 40)

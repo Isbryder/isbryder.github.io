@@ -1,41 +1,62 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
-import           Data.Monoid (mappend)
-import           Hakyll
+import Data.Monoid (mappend)
+import Hakyll
+import Hakyll.Images ( loadImage
+                     , compressJpgCompiler
+                     , resizeImageCompiler
+                     , scaleImageCompiler
+                     )
 
-import Debug.Trace
+import System.FilePath
 
 
---------------------------------------------------------------------------------
+cleanRoute :: Routes
+cleanRoute = customRoute createIndexRoute
+    where
+        createIndexRoute "index.html" = "index.html"
+        createIndexRoute ident = takeDirectory p </> takeBaseName p </> "index.html"
+            where p = toFilePath ident
+
+cleanIndexHtmls :: Item String -> Compiler (Item String)
+cleanIndexHtmls = return . fmap (replaceAll pattern replacement)
+    where
+        pattern = "/index.html"
+        replacement = const "/"
+
 main :: IO ()
 main = hakyll $ do
-    match "favicon.ico" $ do
-        route   idRoute
+    match "files/*" $ do
+        route $ gsubRoute "files/" (const "")
         compile copyFileCompiler
 
-    match "images/*" $ do
-        route   idRoute
-        compile copyFileCompiler
+    match "images/**.jpg" $ do
+        route idRoute
+        compile $ loadImage 
+            >>= resizeImageCompiler 720 480
+            >>= compressJpgCompiler 50
 
-    match "css/*" $ do
-        route   idRoute
-        compile compressCssCompiler
+    match "style/*.hs" $ do
+        route (setExtension "css")
+        compile (getResourceString >>= withItemBody (unixFilter "runghc" []))
 
-    match (fromList ["aldersgruppe.markdown", "sted.markdown", "varighed.markdown", "rekvisitter.markdown","deltager-antal.markdown", "isbryderne.html", "isbjørn.html", "danbjørn.html"]) $ do
-        route   $ setExtension "html"
-        compile $ pandocCompiler
+    match "pages/*" $ do
+        route $ gsubRoute "pages/" (const "") `composeRoutes` cleanRoute `composeRoutes` setExtension "html"
+        compile $ getResourceBody
+            >>= applyAsTemplate defaultContext
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
+            >>= cleanIndexHtmls
 
     match ("loever/*" .||. "rekvisitter/*" .||. "entreprenoerer/*") $ do
-        route $ setExtension "html"
+        route $ cleanRoute `composeRoutes` setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/item.html"    defaultContext
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
     create ["rekvisitter.html"] $ do
-        route idRoute
+        route cleanRoute
         compile $ do
             rekvisitter <- loadAll "rekvisitter/*"
 
@@ -49,7 +70,7 @@ main = hakyll $ do
                 >>= relativizeUrls
 
     create ["roller.html"] $ do
-        route idRoute
+        route cleanRoute
         compile $ do
             loever <- loadAll "loever/*"
             entreprenoerer <- loadAll "entreprenoerer/*"
@@ -63,12 +84,7 @@ main = hakyll $ do
                 >>= loadAndApplyTemplate "templates/roller.html" ctx
                 >>= loadAndApplyTemplate "templates/default.html" ctx
                 >>= relativizeUrls
+                >>= cleanIndexHtmls
 
-    match "index.html" $ do
-        route idRoute
-        compile $ getResourceBody
-                >>= applyAsTemplate defaultContext
-                >>= loadAndApplyTemplate "templates/default.html" defaultContext
-                >>= relativizeUrls
 
     match "templates/*" $ compile templateBodyCompiler

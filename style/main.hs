@@ -7,6 +7,8 @@ import Data.Monoid
 import qualified Data.Text.Lazy.IO as T
 import qualified Clay.Media as Media
 
+import Prelude hiding (all)
+
 main :: IO ()
 main = T.putStr $ renderWith compact [] site
 
@@ -39,6 +41,9 @@ roboto :: Css
 roboto = fontFamily ["Roboto", "Open Sans"] [sansSerif]
 -------------------------------------------------------------------------------
 
+wide :: Css -> Css
+wide = query all [Media.minWidth (px 720)]
+-------------------------------------------------------------------------------
 
 
 site :: Css
@@ -66,6 +71,8 @@ site = html <> body ? do
             padding (px 2) (px 2)  (px 2) (px 2)
         table ? do
             padding (px 2) (px 2)  (px 2) (px 2)
+        wide $ do
+            minWidth (px 720)
     roboto
     h1 ? do
         fontColor primary

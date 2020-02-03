@@ -5,7 +5,6 @@ import Hakyll
 import Hakyll.Images ( loadImage
                      , compressJpgCompiler
                      , resizeImageCompiler
-                     , scaleImageCompiler
                      )
 
 import System.FilePath

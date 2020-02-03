@@ -42,7 +42,8 @@ jobs:
             git commit -m "publish $CIRCLE_SHA1 [ci skip]"
             # push to pages branch
             git remote add origin "$CIRCLE_REPOSITORY_URL"
-            sudo apt update
-            sudo apt install -y openssh-server
+            sudo apt update 
+            sudo apt install openssh-server
+            ssh-keyscan github.com >> $HOME/.ssh/known_hosts
             which ssh
             git push --force origin master

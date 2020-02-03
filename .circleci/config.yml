@@ -44,6 +44,7 @@ jobs:
             git remote add origin "$CIRCLE_REPOSITORY_URL"
             sudo apt update
             sudo apt install -y openssh-server
+            mkdir -p $HOME/.ssh/
             touch $HOME/.ssh/known_hosts
             ssh-keyscan github.com >> $HOME/.ssh/known_hosts
             which ssh

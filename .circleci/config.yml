@@ -16,9 +16,7 @@ jobs:
             - stack-
       - run:
           name: Resolve/Update Dependencies
-          command:
-            - stack setup
-            - stack build --dependencies-only
+          command: stack setup && stack build --dependencies-only
       - save_cache:
           name: Cache Dependencies
           key: stack-{{ .Branch }}-{{ checksum "stack.yaml" }}

@@ -4,6 +4,9 @@ jobs:
     docker:
       - image: fpco/stack-build:lts
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "47:a0:7f:57:a5:5b:87:55:f6:42:30:07:ae:1c:b6:89"
       - checkout
       - restore_cache:
           name: Restore Cached Dependencies
@@ -42,10 +45,10 @@ jobs:
             git commit -m "publish $CIRCLE_SHA1 [ci skip]"
             # push to pages branch
             git remote add origin "$CIRCLE_REPOSITORY_URL"
-            sudo apt update
-            sudo apt install -y openssh-server
-            mkdir -p $HOME/.ssh/
-            touch $HOME/.ssh/known_hosts
-            ssh-keyscan github.com >> $HOME/.ssh/known_hosts
-            which ssh
+            #sudo apt update
+            #sudo apt install -y openssh-server
+            #mkdir -p $HOME/.ssh/
+            #touch $HOME/.ssh/known_hosts
+            #ssh-keyscan github.com >> $HOME/.ssh/known_hosts
+            #which ssh
             git push --force origin master

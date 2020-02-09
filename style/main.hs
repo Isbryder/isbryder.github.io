@@ -55,6 +55,7 @@ site = html <> body ? do
     justifyContent center
     ".logo" ? do
         fontSize (px 19)
+        marginRight (px 30)
         a # href ? do
             float floatRight
             color darkPrimary

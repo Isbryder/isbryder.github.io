@@ -56,6 +56,26 @@ site = html <> body ? do
     img ? do
         border solid (px 2) darkPrimary
         maxWidth (pct 100)
+    ".toc" ? do
+        border solid (px 2) darkPrimary
+        backgroundColor divider
+        color darkPrimary
+        float floatRight
+        padding (px 20) (px 30)  (px 20) (px 20)
+        margin (px 20) (px 20)  (px 20) (px 20)
+        ".header" ? do
+            fontSize (px 19)
+            paddingLeft (px 15)
+        ul ? do
+            listStyle none inside none
+            paddingLeft (px 15)
+            fontSize (px 14)
+            a ? do
+                color darkPrimary
+            a # href # hover ? do
+                textDecoration none
+                color primaryText
+
     main_ ? do
         maxWidth (px 720)
         border solid (px 2) darkPrimary

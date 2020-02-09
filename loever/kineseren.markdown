@@ -1,13 +1,11 @@
 ---
 title: Kineseren
-description: Perfekt til en lille sur fyr
+description: Perfekt til en lille sur fyr.
 ---
 
 ## Introduktion
 Denne løve opfylder alle fordomme om den kinesiske arbejdsmarkede. Denne karakter bør derfor spilles af en person der har let ved racisme.
 Du vælger selv hvad du vil hedde, men et forslag kunne være: Xi Jinping Ching Chong Wo. En kinesisk accent påskønnes.
-
-
 
 
 ## Forslag og citater:

@@ -43,6 +43,9 @@ roboto = fontFamily ["Roboto", "Open Sans"] [sansSerif]
 
 wide :: Css -> Css
 wide = query all [Media.minWidth (px 720)]
+
+narrow :: Css -> Css
+narrow = query all [Media.maxWidth (px 720)]
 -------------------------------------------------------------------------------
 
 
@@ -55,12 +58,14 @@ site = html <> body ? do
     justifyContent center
     ".logo" ? do
         fontSize (px 19)
-        marginRight (px 30)
+        marginRight (px 2)
+        float floatRight
         a # href ? do
-            float floatRight
             color darkPrimary
         a # href # hover ? do
             color lightPrimary
+        narrow $ do
+            float none
     img ? do
         border solid (px 2) darkPrimary
         maxWidth (pct 100)
@@ -69,8 +74,11 @@ site = html <> body ? do
         backgroundColor divider
         color darkPrimary
         float floatRight
-        padding (px 20) (px 30)  (px 20) (px 20)
-        margin (px 20) (px 20)  (px 20) (px 20)
+        padding (px 20) (px 70)  (px 20) (px 20)
+        margin (px 20) (px 0)  (px 20) (px 20)
+        narrow $ do
+            float none
+            margin (px 20) (px 0)  (px 20) (px 0)
         ".header" ? do
             fontSize (px 19)
             paddingLeft (px 15)

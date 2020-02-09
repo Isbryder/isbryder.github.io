@@ -53,6 +53,13 @@ site = html <> body ? do
     display flex
     alignItems center
     justifyContent center
+    ".logo" ? do
+        fontSize (px 19)
+        a # href ? do
+            float floatRight
+            color darkPrimary
+        a # href # hover ? do
+            color lightPrimary
     img ? do
         border solid (px 2) darkPrimary
         maxWidth (pct 100)

@@ -69,6 +69,8 @@ site = html <> body ? do
     img ? do
         border solid (px 2) darkPrimary
         maxWidth (pct 100)
+    ".title" ? do
+        fontSize (px 56)
     ".toc" ? do
         border solid (px 2) darkPrimary
         backgroundColor divider

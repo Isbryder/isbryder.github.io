@@ -119,5 +119,5 @@ main = hakyll $ do
         withToc = defaultHakyllWriterOptions
             { writerTableOfContents = True
             , writerTOCDepth = 3
-            , writerTemplate = Just "\n<div class=\"toc\"><div class=\"header\">Indhold</div>\n$toc$\n</div>\n$body$"
+            , writerTemplate = Just "\n<div class=\"box toc\"><div class=\"header\">Indhold</div>\n$toc$\n</div>\n$body$"
             }

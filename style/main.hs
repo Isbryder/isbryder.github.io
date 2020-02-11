@@ -1,13 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
+import Data.List.NonEmpty
 import Clay
 import Data.Monoid
 
 import qualified Data.Text.Lazy.IO as T
 import qualified Clay.Media as Media
 
-import Prelude hiding (all)
+import Prelude hiding (rem, all)
 
 main :: IO ()
 main = T.putStr $ renderWith compact [] site
@@ -56,6 +57,15 @@ site = html <> body ? do
     display flex
     alignItems center
     justifyContent center
+    ".box" ? do
+        backgroundColor divider
+        padding (rem 1.25) (rem 1.25)  (rem 1.25) (rem 1.25)
+        borderRadius (px 6) (px 6) (px 6) (px 6)
+        display block
+        boxShadow ((bsColor (rgba 10 10 10 0.1)
+                            $ shadowWithSpread (px 0) (em 0.5) (em 1) (em (-0.125)))
+                                :| [(bsColor (rgba 10 10 10 0.02)
+                                     $ shadowWithSpread (px 0) (px 0) (px 0) (px 1))])
     ".logo" ? do
         fontSize (px 19)
         marginRight (px 2)
@@ -72,15 +82,12 @@ site = html <> body ? do
     ".title" ? do
         fontSize (px 56)
     ".toc" ? do
-        border solid (px 2) darkPrimary
-        backgroundColor divider
         color darkPrimary
         float floatRight
-        padding (px 20) (px 70)  (px 20) (px 20)
-        margin (px 20) (px 0)  (px 20) (px 20)
         narrow $ do
             float none
             margin (px 20) (px 0)  (px 20) (px 0)
+        margin (px 20) (px 0)  (px 20) (px 20)
         ".header" ? do
             fontSize (px 19)
             paddingLeft (px 15)
@@ -93,7 +100,6 @@ site = html <> body ? do
             a # href # hover ? do
                 textDecoration none
                 color primaryText
-
     main_ ? do
         maxWidth (px 720)
         border solid (px 2) darkPrimary

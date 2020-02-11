@@ -1,6 +1,7 @@
 ---
 title: Halle Berry
 description: Har du temperament og stærke følser.
+menu: true
 ---
 
 ## Introduktion

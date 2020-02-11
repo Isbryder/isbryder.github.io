@@ -1,6 +1,7 @@
 ---
 title: Mie Wagne
 description: Til en lummer type.
+menu: true
 ---
 
 ## Introduktion

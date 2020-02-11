@@ -1,6 +1,7 @@
 ---
 title: Ikke Fundet
 description: 404
+menu: true
 ---
 
 Siden du leder efter findes ikke eller er muligtvis slettet.

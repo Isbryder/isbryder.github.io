@@ -58,7 +58,6 @@ site = html <> body ? do
     alignItems center
     justifyContent center
     ".box" ? do
-        backgroundColor divider
         padding (rem 1.25) (rem 1.25)  (rem 1.25) (rem 1.25)
         borderRadius (px 6) (px 6) (px 6) (px 6)
         display block
@@ -83,6 +82,7 @@ site = html <> body ? do
         fontSize (px 56)
     ".toc" ? do
         color darkPrimary
+        backgroundColor divider
         float floatRight
         narrow $ do
             float none
@@ -102,7 +102,6 @@ site = html <> body ? do
                 color primaryText
     main_ ? do
         maxWidth (px 720)
-        border solid (px 2) darkPrimary
         backgroundColor iconText
         padding (px 40) (px 40)  (px 40) (px 40)
         p ? do

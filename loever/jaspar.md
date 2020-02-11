@@ -1,6 +1,7 @@
 ---
 title: Jaspar Buk
 description: Perfekt til blærerøven.
+menu: true
 ---
 
 ## Introduktion

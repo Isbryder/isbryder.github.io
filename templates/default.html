@@ -10,10 +10,12 @@
     </head>
     <body>
         <div>
-            <main role="main">
-                <div class="logo">
-                    <a href="/">Til forsiden</a>
-                </div>
+            <main class="box" role="main">
+                $if(menu)$
+                    <div class="logo">
+                        <a href="/">Til forsiden</a>
+                    </div>
+                $endif$
                 <h1 class="title">$title$</h1>
                 $body$
             </main>

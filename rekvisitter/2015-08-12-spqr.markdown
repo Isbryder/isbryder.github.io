@@ -1,6 +1,7 @@
 ---
 title: S.P.Q.R.
 description: noget
+menu: true
 ---
 
 Mauris in lorem nisl. Maecenas tempus facilisis ante, eget viverra nisl
